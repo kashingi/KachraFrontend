@@ -1,0 +1,36 @@
+.product-dialog {
+  min-width: 500px;
+  max-width: 600px;
+
+  .product-form {
+    padding: 1rem 0;
+
+    mat-form-field {
+      margin-bottom: 1rem;
+    }
+
+    mat-slide-toggle {
+      margin: 1rem 0;
+    }
+  }
+
+  mat-dialog-actions {
+    padding: 1rem 0;
+    gap: 1rem;
+
+    button {
+      min-width: 100px;
+
+      mat-spinner {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .product-dialog {
+    min-width: 90vw;
+    max-width: 95vw;
+  }
+}

@@ -1,0 +1,53 @@
+<section class="products-section" id="products">
+  <div class="container">
+    <h2 class="section-title text-center mb-5">
+      Our <span class="text-primary">Products</span>
+    </h2>
+
+    <!-- Loading State -->
+    <div *ngIf="loading" class="text-center py-5">
+      <mat-spinner></mat-spinner>
+    </div>
+
+    <!-- Products Grid -->
+    <div *ngIf="!loading" class="row">
+      <div class="col-lg-3 col-md-6 mb-4" *ngFor="let product of products">
+        <mat-card class="product-card h-100">
+          <div class="product-image">
+            <img [src]="product.image" [alt]="product.name" class="img-fluid">
+            <div class="product-actions">
+              <button mat-fab color="primary" (click)="addToCart(product)" class="add-to-cart-btn">
+                <mat-icon>add_shopping_cart</mat-icon>
+              </button>
+            </div>
+          </div>
+          
+          <mat-card-content>
+            <h3>{{ product.name }}</h3>
+            <p class="product-description">{{ product.description }}</p>
+            <div class="price">KSH {{ product.price }}/-</div>
+            <div class="rating">
+              <mat-icon *ngFor="let star of getStarArray(product.rating)">star</mat-icon>
+              <mat-icon *ngIf="hasHalfStar(product.rating)">star_half</mat-icon>
+              <span class="rating-value">({{ product.rating }})</span>
+            </div>
+          </mat-card-content>
+          
+          <mat-card-actions>
+            <button mat-raised-button color="primary" (click)="addToCart(product)" class="w-100">
+              <mat-icon>shopping_cart</mat-icon>
+              Add to Cart
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="!loading && products.length === 0" class="text-center py-5">
+      <mat-icon class="empty-icon">inventory_2</mat-icon>
+      <h3>No products found</h3>
+      <p>Please try again later or contact support.</p>
+    </div>
+  </div>
+</section>

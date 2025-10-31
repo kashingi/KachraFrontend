@@ -1,0 +1,154 @@
+<div class="checkout-container">
+  <div class="container">
+    <div class="checkout-header text-center mb-5">
+      <h2>
+        <mat-icon>payment</mat-icon>
+        Checkout
+      </h2>
+      <p>Complete your order</p>
+    </div>
+
+    <div class="row">
+      <!-- Checkout Form -->
+      <div class="col-lg-8">
+        <mat-card class="checkout-form-card">
+          <mat-card-header>
+            <mat-card-title>Shipping Information</mat-card-title>
+          </mat-card-header>
+          
+          <mat-card-content>
+            <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline" class="w-100 mb-3">
+                    <mat-label>First Name</mat-label>
+                    <input matInput formControlName="firstName">
+                    <mat-error *ngIf="checkoutForm.get('firstName')?.hasError('required')">
+                      First name is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline" class="w-100 mb-3">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput formControlName="lastName">
+                    <mat-error *ngIf="checkoutForm.get('lastName')?.hasError('required')">
+                      Last name is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <mat-form-field appearance="outline" class="w-100 mb-3">
+                <mat-label>Email</mat-label>
+                <input matInput type="email" formControlName="email">
+                <mat-error *ngIf="checkoutForm.get('email')?.hasError('required')">
+                  Email is required
+                </mat-error>
+                <mat-error *ngIf="checkoutForm.get('email')?.hasError('email')">
+                  Please enter a valid email
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="w-100 mb-3">
+                <mat-label>Phone Number</mat-label>
+                <input matInput formControlName="phone">
+                <mat-error *ngIf="checkoutForm.get('phone')?.hasError('required')">
+                  Phone number is required
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="w-100 mb-3">
+                <mat-label>Shipping Address</mat-label>
+                <textarea matInput formControlName="shippingAddress" rows="3"></textarea>
+                <mat-error *ngIf="checkoutForm.get('shippingAddress')?.hasError('required')">
+                  Shipping address is required
+                </mat-error>
+              </mat-form-field>
+
+              <div class="payment-section">
+                <h4>Payment Method</h4>
+                <mat-radio-group formControlName="paymentMethod" class="payment-options">
+                  <mat-radio-button value="mpesa" class="payment-option">
+                    <div class="payment-info">
+                      <strong>Lipa na M-Pesa</strong>
+                      <p>Pay using your mobile money</p>
+                    </div>
+                  </mat-radio-button>
+                  
+                  <mat-radio-button value="cash" class="payment-option">
+                    <div class="payment-info">
+                      <strong>Cash on Delivery</strong>
+                      <p>Pay when you receive your order</p>
+                    </div>
+                  </mat-radio-button>
+                </mat-radio-group>
+              </div>
+            </form>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <!-- Order Summary -->
+      <div class="col-lg-4">
+        <mat-card class="order-summary-card">
+          <mat-card-header>
+            <mat-card-title>Order Summary</mat-card-title>
+          </mat-card-header>
+          
+          <mat-card-content>
+            <!-- Items List -->
+            <div class="order-items">
+              <div class="order-item" *ngFor="let item of cart.items">
+                <div class="item-info">
+                  <img [src]="item.product.image" [alt]="item.product.name" class="item-image">
+                  <div class="item-details">
+                    <h5>{{ item.product.name }}</h5>
+                    <p>Qty: {{ item.quantity }}</p>
+                  </div>
+                </div>
+                <div class="item-price">KSH {{ item.price * item.quantity }}/-</div>
+              </div>
+            </div>
+
+            <mat-divider></mat-divider>
+
+            <!-- Summary -->
+            <div class="summary-section">
+              <div class="summary-row">
+                <span>Subtotal</span>
+                <span>KSH {{ cart.total }}/-</span>
+              </div>
+              
+              <div class="summary-row">
+                <span>Delivery Fee</span>
+                <span class="free">Free</span>
+              </div>
+              
+              <mat-divider></mat-divider>
+              
+              <div class="summary-row total">
+                <span>Total</span>
+                <span>KSH {{ cart.total }}/-</span>
+              </div>
+            </div>
+          </mat-card-content>
+          
+          <mat-card-actions>
+            <button 
+              mat-raised-button 
+              color="primary" 
+              class="w-100 place-order-btn"
+              (click)="onSubmit()"
+              [disabled]="checkoutForm.invalid || loading">
+              <mat-spinner diameter="20" *ngIf="loading"></mat-spinner>
+              <mat-icon *ngIf="!loading">shopping_bag</mat-icon>
+              <span *ngIf="!loading">Place Order</span>
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

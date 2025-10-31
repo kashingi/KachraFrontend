@@ -1,0 +1,100 @@
+<mat-toolbar class="header-toolbar">
+  <div class="container-fluid">
+    <div class="row align-items-center w-100">
+      <!-- Logo -->
+      <div class="col-md-2">
+        <a routerLink="/home" class="logo">
+          <mat-icon>shopping_basket</mat-icon>
+          freshHub
+        </a>
+      </div>
+
+      <!-- Navigation -->
+      <div class="col-md-6">
+        <nav class="navbar" [class.active]="isMenuOpen">
+          <a href="home#home">Home</a>
+          <a href="home#features">Features</a>
+          <a routerLink="/products" routerLinkActive="active">Products</a>
+          <a href="home#categories">Categories</a>
+          <a href="home#blogs">Blogs</a>
+        </nav>
+      </div>
+
+      <!-- Icons and Search -->
+      <div class="col-md-4">
+        <div class="header-actions">
+          <!-- Search -->
+          <div class="search-container" style="margin-left: 10px;">
+            <input
+              type="text"
+              [(ngModel)]="searchQuery"
+              (keyup.enter)="onSearch()"
+              placeholder="Search products..."
+              class="search-input"
+            />
+            <button mat-icon-button (click)="onSearch()">
+              <mat-icon matSuffix>search</mat-icon>
+            </button>
+          </div>
+
+          <!-- Cart -->
+          <button mat-icon-button (click)="navigateToCart()" class="cart-btn">
+            <mat-icon
+              [matBadge]="cartItemCount"
+              [matBadgeHidden]="cartItemCount === 0"
+              >shopping_cart</mat-icon
+            >
+          </button>
+
+          <!-- User Menu -->
+          <div class="user-menu">
+            <button
+              mat-icon-button
+              [matMenuTriggerFor]="userMenu"
+              *ngIf="currentUser; else loginButton"
+            >
+              <mat-icon>person</mat-icon>
+            </button>
+            <mat-menu #userMenu="matMenu">
+              <div class="user-info">
+                <p>{{ currentUser?.firstName }} {{ currentUser?.lastName }}</p>
+                <small>{{ currentUser?.email }}</small>
+              </div>
+              <mat-divider></mat-divider>
+              <button mat-menu-item routerLink="/orders">
+                <mat-icon>receipt_long</mat-icon>
+                My Orders
+              </button>
+              <button
+                mat-menu-item
+                routerLink="/admin"
+                *ngIf="currentUser?.role === 'admin'"
+              >
+                <mat-icon>admin_panel_settings</mat-icon>
+                Admin Panel
+              </button>
+              <mat-divider></mat-divider>
+              <button mat-menu-item (click)="logout()">
+                <mat-icon>logout</mat-icon>
+                Logout
+              </button>
+            </mat-menu>
+
+            <ng-template #loginButton>
+              <button mat-button routerLink="/login">Login</button>
+            </ng-template>
+          </div>
+
+          <!-- Mobile Menu Toggle -->
+          <button
+            mat-icon-button
+            class="menu-toggle d-md-none"
+            (click)="toggleMenu()"
+          >
+            <mat-icon>menu</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-toolbar>

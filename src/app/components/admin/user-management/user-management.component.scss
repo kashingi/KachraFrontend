@@ -1,0 +1,100 @@
+.user-management {
+  padding: 2rem 0;
+  background: #f8f9fa;
+  min-height: calc(100vh - 200px);
+
+  .management-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+
+    h2 {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #333;
+      margin: 0;
+
+      mat-icon {
+        color: #27ae60;
+        font-size: 2rem;
+        width: 2rem;
+        height: 2rem;
+      }
+    }
+
+    button {
+      border-radius: 25px;
+      padding: 0.75rem 1.5rem;
+
+      mat-icon {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+
+  .users-table-card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+
+    .table-responsive {
+      overflow-x: auto;
+    }
+
+    table {
+      mat-header-cell {
+        background: #f8f9fa;
+        color: #333;
+        font-weight: 600;
+      }
+
+      mat-cell {
+        padding: 1rem 0.5rem;
+
+        mat-chip {
+          &.admin {
+            background: #e74c3c;
+            color: white;
+          }
+
+          &.user {
+            background: #3498db;
+            color: white;
+          }
+
+          &.active {
+            background: #27ae60;
+            color: white;
+          }
+
+          &.inactive {
+            background: #95a5a6;
+            color: white;
+          }
+        }
+      }
+    }
+  }
+
+  mat-spinner {
+    margin: 2rem auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .user-management {
+    padding: 1rem 0;
+
+    .management-header {
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+
+      button {
+        width: 100%;
+      }
+    }
+  }
+}

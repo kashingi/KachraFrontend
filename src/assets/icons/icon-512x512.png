@@ -1,0 +1,35 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle with gradient -->
+  <defs>
+    <linearGradient id="bgGradient512" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#27ae60;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#2ecc71;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#219a52;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow512" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="4" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <circle cx="256" cy="256" r="240" fill="url(#bgGradient512)" filter="url(#shadow512)"/>
+  
+  <!-- Shopping basket -->
+  <path d="M128 192h256l-24 128H152L128 192z" fill="#fff" stroke="#27ae60" stroke-width="8"/>
+  
+  <!-- Basket handle -->
+  <path d="M160 192V128a96 96 0 01192 0v64" fill="none" stroke="#fff" stroke-width="16" stroke-linecap="round"/>
+  
+  <!-- Fresh produce -->
+  <circle cx="192" cy="240" r="20" fill="#e74c3c"/>
+  <circle cx="256" cy="256" r="20" fill="#f39c12"/>
+  <circle cx="320" cy="240" r="20" fill="#2ecc71"/>
+  <circle cx="224" cy="280" r="16" fill="#9b59b6"/>
+  <circle cx="288" cy="280" r="16" fill="#3498db"/>
+  <circle cx="256" cy="300" r="12" fill="#e67e22"/>
+  
+  <!-- Sparkle effects -->
+  <path d="M384 128l16 32 32 16-32 16-16 32-16-32-32-16 32-16 16-32z" fill="#fff" opacity="0.9"/>
+  <path d="M416 352l8 16 16 8-16 8-8 16-8-16-16-8 16-8 8-16z" fill="#fff" opacity="0.8"/>
+  <path d="M96 96l8 16 16 8-16 8-8 16-8-16-16-8 16-8 8-16z" fill="#fff" opacity="0.7"/>
+  <path d="M432 256l6 12 12 6-12 6-6 12-6-12-12-6 12-6 6-12z" fill="#fff" opacity="0.6"/>
+</svg>

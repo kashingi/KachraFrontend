@@ -1,0 +1,139 @@
+.products-section {
+  padding: 4rem 0;
+
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .product-card {
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    position: relative;
+
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+
+    .product-image {
+      position: relative;
+      height: 250px;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+
+      .product-actions {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+
+        .add-to-cart-btn {
+          width: 50px;
+          height: 50px;
+          box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+
+          mat-icon {
+            font-size: 20px;
+          }
+        }
+      }
+    }
+
+    mat-card-content {
+      padding: 1.5rem;
+
+      h3 {
+        color: #333;
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+
+      .product-description {
+        color: #666;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin-bottom: 1rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .price {
+        color: #27ae60;
+        font-size: 1.4rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+      }
+
+      .rating {
+        display: flex;
+        align-items: center;
+        gap: 0.2rem;
+
+        mat-icon {
+          color: #ffc107;
+          font-size: 18px;
+          width: 18px;
+          height: 18px;
+        }
+
+        .rating-value {
+          margin-left: 0.5rem;
+          color: #666;
+          font-size: 0.9rem;
+        }
+      }
+    }
+
+    mat-card-actions {
+      padding: 0 1.5rem 1.5rem;
+
+      button {
+        border-radius: 25px;
+        font-weight: 600;
+
+        mat-icon {
+          margin-right: 0.5rem;
+          font-size: 20px;
+        }
+      }
+    }
+
+    &:hover {
+      .product-image {
+        img {
+          transform: scale(1.1);
+        }
+
+        .product-actions {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  .empty-icon {
+    font-size: 4rem;
+    width: 4rem;
+    height: 4rem;
+    color: #ccc;
+    margin-bottom: 1rem;
+  }
+
+  mat-spinner {
+    margin: 2rem auto;
+  }
+}

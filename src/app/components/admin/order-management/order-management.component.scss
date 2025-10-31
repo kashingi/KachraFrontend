@@ -1,0 +1,99 @@
+.order-management {
+  padding: 2rem 0;
+  background: #f8f9fa;
+  min-height: calc(100vh - 200px);
+
+  .management-header {
+    margin-bottom: 2rem;
+
+    h2 {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #333;
+      margin: 0;
+
+      mat-icon {
+        color: #27ae60;
+        font-size: 2rem;
+        width: 2rem;
+        height: 2rem;
+      }
+    }
+  }
+
+  .orders-table-card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+
+    .table-responsive {
+      overflow-x: auto;
+    }
+
+    table {
+      mat-header-cell {
+        background: #f8f9fa;
+        color: #333;
+        font-weight: 600;
+      }
+
+      mat-cell {
+        padding: 1rem 0.5rem;
+
+        .customer-info {
+          display: flex;
+          flex-direction: column;
+          gap: 0.25rem;
+
+          strong {
+            color: #333;
+          }
+
+          small {
+            color: #666;
+          }
+        }
+
+        .order-items {
+          display: flex;
+          flex-direction: column;
+          gap: 0.25rem;
+
+          span {
+            color: #333;
+          }
+
+          button {
+            align-self: flex-start;
+            font-size: 0.8rem;
+          }
+        }
+
+        .status-select {
+          min-width: 120px;
+
+          ::ng-deep {
+            .mat-mdc-select-value {
+              font-size: 0.9rem;
+            }
+          }
+        }
+
+        mat-chip {
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+
+  mat-spinner {
+    margin: 2rem auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .order-management {
+    padding: 1rem 0;
+  }
+}

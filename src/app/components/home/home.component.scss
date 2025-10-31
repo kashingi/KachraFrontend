@@ -1,0 +1,50 @@
+.hero-section {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+
+  .hero-content {
+    padding: 2rem 0;
+
+    .hero-title {
+      font-size: 3rem;
+      font-weight: bold;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      color: #333;
+
+      @media (max-width: 768px) {
+        font-size: 2rem;
+      }
+    }
+
+    .hero-description {
+      font-size: 1.2rem;
+      color: #666;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .shop-now-btn {
+      padding: 0.75rem 2rem;
+      font-size: 1.1rem;
+      border-radius: 25px;
+
+      mat-icon {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+
+  .hero-image {
+    text-align: center;
+
+    img {
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      max-height: 500px;
+      object-fit: cover;
+    }
+  }
+}

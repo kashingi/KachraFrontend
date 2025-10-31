@@ -1,0 +1,29 @@
+<section class="categories-section" id="categories">
+  <div class="container">
+    <h2 class="section-title text-center mb-5">
+      Product <span class="text-primary">Categories</span>
+    </h2>
+    
+    <div class="row">
+      <div class="col-lg-3 col-md-6 mb-4" *ngFor="let category of categories">
+        <mat-card class="category-card h-100">
+          <div class="category-image">
+            <img [src]="category.image" [alt]="category.name" class="img-fluid">
+            <div class="category-overlay">
+              <div class="discount-badge" *ngIf="category.discount">
+                Up to {{ category.discount }}% off
+              </div>
+            </div>
+          </div>
+          
+          <mat-card-content>
+            <h3>{{ category.name }}</h3>
+            <button mat-raised-button color="primary" routerLink="/products" [queryParams]="{category: category.name.toLowerCase()}">
+              Shop Now
+            </button>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</section>

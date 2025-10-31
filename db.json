@@ -1,0 +1,179 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "admin@freshhub.com",
+      "password": "admin123",
+      "firstName": "Admin",
+      "lastName": "User",
+      "phone": "+254797293195",
+      "address": "Nairobi, Kenya",
+      "role": "admin",
+      "isActive": true,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "email": "user@example.com",
+      "password": "user123",
+      "firstName": "John",
+      "lastName": "Doe",
+      "phone": "+254700000000",
+      "address": "Nairobi, Kenya",
+      "role": "user",
+      "isActive": true,
+      "createdAt": "2024-01-02T00:00:00.000Z"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Fresh Orange",
+      "description": "Sweet and juicy oranges packed with Vitamin C",
+      "price": 100,
+      "image": "https://images.pexels.com/photos/161559/background-bitter-breakfast-bright-161559.jpeg",
+      "category": "fruits",
+      "stock": 50,
+      "rating": 4.5,
+      "isActive": true,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "name": "Fresh Onions",
+      "description": "Farm-fresh onions perfect for cooking",
+      "price": 650,
+      "image": "https://images.pexels.com/photos/143133/pexels-photo-143133.jpeg",
+      "category": "vegetables",
+      "stock": 30,
+      "rating": 4.2,
+      "isActive": true,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": 3,
+      "name": "Fresh Meat",
+      "description": "Premium quality fresh meat",
+      "price": 340,
+      "image": "https://images.pexels.com/photos/618773/pexels-photo-618773.jpeg",
+      "category": "meat",
+      "stock": 25,
+      "rating": 4.8,
+      "isActive": true,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": 4,
+      "name": "Fresh Cabbages",
+      "description": "Crisp and fresh cabbages",
+      "price": 850,
+      "image": "https://images.pexels.com/photos/693443/pexels-photo-693443.jpeg",
+      "category": "vegetables",
+      "stock": 20,
+      "rating": 4.3,
+      "isActive": true,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": 5,
+      "name": "Fresh Potatoes",
+      "description": "High-quality potatoes perfect for cooking",
+      "price": 1200,
+      "image": "https://images.pexels.com/photos/144248/potatoes-vegetables-erdfrucht-bio-144248.jpeg",
+      "category": "vegetables",
+      "stock": 40,
+      "rating": 4.4,
+      "isActive": true,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": 6,
+      "name": "Fresh Avocados",
+      "description": "Creamy and nutritious avocados",
+      "price": 650,
+      "image": "https://images.pexels.com/photos/557659/pexels-photo-557659.jpeg",
+      "category": "fruits",
+      "stock": 35,
+      "rating": 4.6,
+      "isActive": true,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": 7,
+      "name": "Fresh Carrots",
+      "description": "Sweet and crunchy carrots",
+      "price": 750,
+      "image": "https://images.pexels.com/photos/143133/pexels-photo-143133.jpeg",
+      "category": "vegetables",
+      "stock": 45,
+      "rating": 4.1,
+      "isActive": true,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": 8,
+      "name": "Green Lemons",
+      "description": "Fresh green lemons with zesty flavor",
+      "price": 650,
+      "image": "https://images.pexels.com/photos/1414110/pexels-photo-1414110.jpeg",
+      "category": "fruits",
+      "stock": 60,
+      "rating": 4.0,
+      "isActive": true,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Vegetables",
+      "image": "https://images.pexels.com/photos/1400172/pexels-photo-1400172.jpeg",
+      "discount": 45
+    },
+    {
+      "id": 2,
+      "name": "Fresh Fruits",
+      "image": "https://images.pexels.com/photos/1132047/pexels-photo-1132047.jpeg",
+      "discount": 45
+    },
+    {
+      "id": 3,
+      "name": "Dairy Products",
+      "image": "https://images.pexels.com/photos/236010/pexels-photo-236010.jpeg",
+      "discount": 45
+    },
+    {
+      "id": 4,
+      "name": "Fresh Meat",
+      "image": "https://images.pexels.com/photos/618773/pexels-photo-618773.jpeg",
+      "discount": 45
+    }
+  ],
+  "blogs": [
+    {
+      "id": 1,
+      "title": "Fresh and Organic Fruits Vegetables and Fruits",
+      "content": "Sourced Fresh Daily From Local Farms Around Nairobi. Taste the Difference Quality Makes!",
+      "author": "Murigi",
+      "date": "2024-08-07",
+      "image": "https://images.pexels.com/photos/1435904/pexels-photo-1435904.jpeg"
+    },
+    {
+      "id": 2,
+      "title": "Fresh and Organic Fruits Vegetables and Fruits",
+      "content": "Nourish Your Body with Wholesome, Certified Organic Produce. Grown Naturally for a Healthier You in Nairobi.",
+      "author": "Arnold",
+      "date": "2024-08-07",
+      "image": "https://images.pexels.com/photos/1300972/pexels-photo-1300972.jpeg"
+    },
+    {
+      "id": 3,
+      "title": "Fresh and Organic Fruits Vegetables and Fruits",
+      "content": "Your Go-To for Fresh and Delicious Organic Products in Nairobi. Shop Now for a Healthier Lifestyle!",
+      "author": "Janet",
+      "date": "2024-08-07",
+      "image": "https://images.pexels.com/photos/1458694/pexels-photo-1458694.jpeg"
+    }
+  ],
+  "orders": []
+}

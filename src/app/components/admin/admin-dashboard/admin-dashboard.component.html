@@ -1,0 +1,156 @@
+<div class="admin-dashboard">
+  <div class="container-fluid">
+    <div class="dashboard-header">
+      <h2>
+        <mat-icon>dashboard</mat-icon>
+        Admin Dashboard
+      </h2>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="row mb-4">
+      <div class="col-lg-3 col-md-6 mb-3">
+        <mat-card class="stat-card users">
+          <mat-card-content>
+            <div class="stat-content">
+              <div class="stat-icon">
+                <mat-icon>people</mat-icon>
+              </div>
+              <div class="stat-info">
+                <h3>{{ totalUsers }}</h3>
+                <p>Total Users</p>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <div class="col-lg-3 col-md-6 mb-3">
+        <mat-card class="stat-card products">
+          <mat-card-content>
+            <div class="stat-content">
+              <div class="stat-icon">
+                <mat-icon>inventory</mat-icon>
+              </div>
+              <div class="stat-info">
+                <h3>{{ totalProducts }}</h3>
+                <p>Total Products</p>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <div class="col-lg-3 col-md-6 mb-3">
+        <mat-card class="stat-card orders">
+          <mat-card-content>
+            <div class="stat-content">
+              <div class="stat-icon">
+                <mat-icon>shopping_bag</mat-icon>
+              </div>
+              <div class="stat-info">
+                <h3>{{ totalOrders }}</h3>
+                <p>Total Orders</p>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <div class="col-lg-3 col-md-6 mb-3">
+        <mat-card class="stat-card revenue">
+          <mat-card-content>
+            <div class="stat-content">
+              <div class="stat-icon">
+                <mat-icon>attach_money</mat-icon>
+              </div>
+              <div class="stat-info">
+                <h3>KSH {{ totalRevenue }}/-</h3>
+                <p>Total Revenue</p>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <mat-card class="quick-actions-card">
+          <mat-card-header>
+            <mat-card-title>Quick Actions</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="quick-actions">
+              <button mat-raised-button color="primary" routerLink="/admin/users">
+                <mat-icon>people</mat-icon>
+                Manage Users
+              </button>
+              <button mat-raised-button color="accent" routerLink="/admin/products">
+                <mat-icon>inventory</mat-icon>
+                Manage Products
+              </button>
+              <button mat-raised-button color="warn" routerLink="/admin/orders">
+                <mat-icon>shopping_bag</mat-icon>
+                Manage Orders
+              </button>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+
+    <!-- Recent Orders -->
+    <div class="row">
+      <div class="col-lg-8">
+        <mat-card class="recent-orders-card">
+          <mat-card-header>
+            <mat-card-title>Recent Orders</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div *ngIf="recentOrders.length === 0" class="text-center py-4">
+              <p>No recent orders</p>
+            </div>
+            <div *ngIf="recentOrders.length > 0">
+              <div class="order-item" *ngFor="let order of recentOrders">
+                <div class="order-info">
+                  <strong>Order #{{ order.id }}</strong>
+                  <span class="order-date">{{ order.createdAt | date:'short' }}</span>
+                </div>
+                <div class="order-status">
+                  <mat-chip [ngClass]="order.status">{{ order.status | titlecase }}</mat-chip>
+                </div>
+                <div class="order-total">
+                  KSH {{ order.total }}/-
+                </div>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <div class="col-lg-4">
+        <mat-card class="low-stock-card">
+          <mat-card-header>
+            <mat-card-title>Low Stock Alert</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div *ngIf="lowStockProducts.length === 0" class="text-center py-4">
+              <p>All products are well stocked</p>
+            </div>
+            <div *ngIf="lowStockProducts.length > 0">
+              <div class="stock-item" *ngFor="let product of lowStockProducts">
+                <div class="product-info">
+                  <strong>{{ product.name }}</strong>
+                  <span class="stock-count">{{ product.stock }} left</span>
+                </div>
+                <mat-icon class="warning-icon">warning</mat-icon>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

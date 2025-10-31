@@ -1,0 +1,36 @@
+{
+  "name": "angular-grocery-store",
+  "private": true,
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "json-server": "json-server --watch db.json --port 3000"
+  },
+  "dependencies": {
+    "@angular/animations": "19.2.0",
+    "@angular/cdk": "19.2.0",
+    "@angular/common": "19.2.0",
+    "@angular/compiler": "19.2.0",
+    "@angular/core": "19.2.0",
+    "@angular/forms": "19.2.0",
+    "@angular/material": "19.2.0",
+    "@angular/platform-browser": "19.2.0",
+    "@angular/router": "19.2.0",
+    "bootstrap": "^5.3.0",
+    "jspdf": "^3.0.1",
+    "jspdf-autotable": "^5.0.2",
+    "rxjs": "^7.8.1",
+    "swiper": "^11.1.0",
+    "tslib": "^2.5.0",
+    "xlsx": "^0.18.5",
+    "zone.js": "~0.15.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "19.2.0",
+    "@angular/cli": "19.2.0",
+    "@angular/compiler-cli": "19.2.0",
+    "json-server": "^0.17.4",
+    "typescript": "^5.8.2"
+  }
+}
