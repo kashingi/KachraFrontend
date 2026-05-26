@@ -62,12 +62,14 @@ export class LoginComponent implements OnInit {
       this.loading = true;
       this.authService.login(this.loginForm.value).subscribe({
         next: (response) => {
+          console.log('Login response:', response);
           this.loading = false;
           this.router.navigate([this.returnUrl]);
           this.snackbar.success('Login successfully.', 'X')
 
         },
         error: (error) => {
+          console.error('Login error:', error);
           this.loading = false;
           this.snackbar.danger('The system is busy, try again later.', 'X');
         }

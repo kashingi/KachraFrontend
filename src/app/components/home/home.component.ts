@@ -8,6 +8,7 @@ import { FeaturesComponent } from '../features/features.component';
 import { ProductsComponent } from '../products/products.component';
 import { CategoriesComponent } from '../categories/categories.component';
 import { BlogsComponent } from '../blogs/blogs.component';
+import { HomeService } from '../../services/home.service';
 
 @Component({
   selector: 'app-home',
@@ -28,8 +29,34 @@ import { BlogsComponent } from '../blogs/blogs.component';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private homeService: HomeService) { }
+
+  badgeImage!: string;
+  badgeTitle!: string;
+  badgeDescription!: string;
 
   ngOnInit(): void {
+    this.getBadge();
+  }
+
+  getBadge() {
+    this.homeService.getBadge().subscribe({
+      next: (resp: any)=>{
+        console.log("Badge response : ", resp);
+        if (resp && resp.length > 0) {
+          const badge = resp[0];
+          this.badgeTitle = badge.title;
+          this.badgeDescription = badge.description;
+          this.badgeImage = `data:image/jpeg;base64,${badge.image}`;
+        }
+        console.log("Response error : ", resp)
+      },
+      error: (error)=> {
+        console.log("Response error : ", error);
+      },
+      complete: () => {
+        console.log("API executed successfully.")
+      }
+    })
   }
 }
