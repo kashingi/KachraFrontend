@@ -41,11 +41,9 @@ export class RegisterComponent {
     private snackbar: SnackbarService
   ) {
     this.registerForm = this.formBuilder.group({
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
+      name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required]],
-      address: ['', [Validators.required]],
+      contact: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required]]
     }, { validators: this.passwordMatchValidator });
@@ -63,18 +61,23 @@ export class RegisterComponent {
 
   onSubmit(): void {
     if (this.registerForm.valid) {
+      const userData = this.registerForm.value;
+      console.log('Registering user:', userData);
+      delete userData.confirmPassword; // Remove confirmPassword before sending to API
       this.loading = true;
-      this.authService.register(this.registerForm.value).subscribe({
+      this.authService.register(userData).subscribe({
         next: (response) => {
+          console.log('Registration response:', response);
           this.loading = false;
-          this.snackbar.success('Account created successfully! You can now login.', 'X');
+          this.snackbar.success(response.Message + ' ! You can now login.', 'Close');
           setTimeout(() => {
             this.router.navigate(['/login']);
           }, 2000);
         },
-        error: (error) => {
+        error: (err) => {
+          console.log('Registration error:', err);
           this.loading = false;
-          this.snackbar.danger('Registration failed. Please try again.', 'X');
+          this.snackbar.danger(err.error?.Message, 'Close');
         }
       });
     }

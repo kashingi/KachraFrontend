@@ -2,15 +2,17 @@
   "users": [
     {
       "id": "1",
-      "email": "admin@freshhub.com",
+      "email": "adminuser@mail.com",
       "password": "admin123",
       "firstName": "Admin",
       "lastName": "User",
       "phone": "+254797293195",
       "address": "Nairobi CBD, Kenya",
-      "role": "admin",
+      "role": "User",
       "isActive": true,
-      "createdAt": "2024-01-01T00:00:00.000Z"
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "name": "Admin Registered",
+      "contact": "+254702000000"
     },
     {
       "id": "2",

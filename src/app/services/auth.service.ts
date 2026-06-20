@@ -2,18 +2,18 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-import { User, LoginRequest, RegisterRequest, AuthResponse } from '../models/user.model';
+import { User, LoginRequest, AuthResponse } from '../models/user.model';
 import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000';
+  //private apiUrl = 'http://localhost:3000';
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
 
-  apiServices = environment.apiUrl;
+  apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {
     this.loadUserFromStorage();
@@ -51,7 +51,7 @@ export class AuthService {
 
   //Login function here
   loginUser(credentials: LoginRequest): Observable<AuthResponse> {
-    const loginUrl = this.apiServices + 'v1/auth/login';
+    const loginUrl = this.apiUrl + '/auth/login';
 
     return this.http.post<AuthResponse>(loginUrl, credentials).pipe(
       map(response => {
@@ -67,18 +67,9 @@ export class AuthService {
     );
   }
 
-  register(userData: RegisterRequest): Observable<User> {
-    const newUser: User = {
-      email: userData.email,
-      password: userData.password,
-      name: userData.name,
-      contact: userData.contact,
-      role: 'user',
-      createdAt: new Date().toISOString(),
-      isActive: true
-    };
-
-    return this.http.post<User>(`${this.apiUrl}/users`, newUser);
+  register(userData: any): Observable<any> {
+    const registerUrl = this.apiUrl + '/auth/register';
+    return this.http.post<User>(registerUrl, userData);
   }
 
   logout(): void {

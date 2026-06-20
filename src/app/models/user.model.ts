@@ -14,9 +14,9 @@ export interface LoginRequest {
   password: string;
 }
 
-export interface RegisterRequest extends User {
-  confirmPassword: string;
-}
+// export interface RegisterRequest extends User {
+//   confirmPassword: string;
+// }
 
 export interface AuthResponse {
   user: User;
