@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     if (this.loginForm.valid) {
       this.loading = true;
-      this.authService.login(this.loginForm.value).subscribe({
+      this.authService.loginUser(this.loginForm.value).subscribe({
         next: (response) => {
           console.log('Login response:', response);
           this.loading = false;

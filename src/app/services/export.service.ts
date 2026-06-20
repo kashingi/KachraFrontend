@@ -28,9 +28,9 @@ export class ExportService {
     // Prepare table data
     const tableData = users.map(user => [
       user.id?.toString() || '',
-      `${user.firstName} ${user.lastName}`,
+      `${user.name}`,
       user.email,
-      user.phone || '',
+      user.contact || '',
       user.role,
       user.isActive ? 'Active' : 'Inactive',
       new Date(user.createdAt || '').toLocaleDateString()
@@ -38,7 +38,7 @@ export class ExportService {
 
     // Add table
     autoTable(doc, {
-      head: [['ID', 'Name', 'Email', 'Phone', 'Role', 'Status', 'Created']],
+      head: [['ID', 'Name', 'Email', 'Contact', 'Role', 'Status', 'Created']],
       body: tableData,
       startY: 35,
       styles: { fontSize: 8 },
@@ -54,11 +54,9 @@ export class ExportService {
     const worksheet = XLSX.utils.json_to_sheet(
       users.map(user => ({
         'ID': user.id,
-        'First Name': user.firstName,
-        'Last Name': user.lastName,
+        'Name': user.name,
         'Email': user.email,
-        'Phone': user.phone,
-        'Address': user.address,
+        'Contact': user.contact,
         'Role': user.role,
         'Status': user.isActive ? 'Active' : 'Inactive',
         'Created Date': new Date(user.createdAt || '').toLocaleDateString()

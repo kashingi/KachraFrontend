@@ -51,7 +51,7 @@ export class UserManagementComponent implements OnInit {
   dataSource = new MatTableDataSource<User>([]);
   loading = true;
   totalUsers = 0;
-  displayedColumns: string[] = ['id', 'name', 'email', 'phone', 'role', 'status', 'actions'];
+  displayedColumns: string[] = ['id', 'name', 'email', 'contact', 'role', 'status', 'actions'];
 
   constructor(
     private userService: UserService,
@@ -74,6 +74,7 @@ export class UserManagementComponent implements OnInit {
         
       },
       error: (error) => {
+        this.snackbar.warning('Failed to load users, try again later.', 'Close');
         console.log('Error loading users:', error);
         this.loading = false;
       }
@@ -107,18 +108,14 @@ export class UserManagementComponent implements OnInit {
   }
 
   createUser(userData: User): void {
-
-    const newId = (Math.max(...this.users.map(u => parseInt(u.id as string) || 0)) + 1).toString();
-    userData.id = newId;
     
     this.userService.createUser(userData).subscribe({
-      next: (newUser) => {
-        this.users.push(newUser);
+      next: (resp: any) => {
+        this.snackbar.success(resp.Message, 'Close');
         this.loadUsers();
-        this.snackbar.success('User created successfully.', 'X');
       },
-      error: (error) => {
-        this.snackbar.danger('Failed to create user', 'X');
+      error: (err: any) => {
+        this.snackbar.danger(err.error.Message, 'Close');
       }
     });
   }
@@ -165,7 +162,7 @@ export class UserManagementComponent implements OnInit {
   handleDeleteAction(user: User) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = {
-      message: ' delete ' + user.firstName + ' ' + user.lastName + ' product',
+      message: ' delete ' + user.name + ' product',
       confirmation: true
     }
     const dialogRef = this.dialog.open(ConfirmationComponent, dialogConfig);

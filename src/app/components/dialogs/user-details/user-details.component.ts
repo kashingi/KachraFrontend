@@ -43,11 +43,10 @@ export class UserDetailsComponent {
 
     // Create the form with all controls, including 'password'
     this.userForm = this.formBuilder.group({
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
+      name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required]],
-      address: ['', [Validators.required]],
+      contact: ['', [Validators.required]],
+      //address: ['', [Validators.required]],
       role: ['user', [Validators.required]],
       isActive: [true],
       password: [''] // Include password control with no validators initially
@@ -67,11 +66,10 @@ export class UserDetailsComponent {
 
   private populateForm(user: User): void {
     this.userForm.patchValue({
-      firstName: user.firstName,
-      lastName: user.lastName,
+      name: user.name,
       email: user.email,
-      phone: user.phone,
-      address: user.address,
+      contact: user.contact,
+      //address: user.address,
       role: user.role,
       isActive: user.isActive
       // Note: We don’t set 'password' here since it’s not used when editing
@@ -84,11 +82,10 @@ export class UserDetailsComponent {
       const formValue = this.userForm.value;
 
       const userData: User = {
-        firstName: formValue.firstName,
-        lastName: formValue.lastName,
+        name: formValue.name,
         email: formValue.email,
-        phone: formValue.phone,
-        address: formValue.address,
+        contact: formValue.contact,
+        //address: formValue.address,
         role: formValue.role,
         isActive: formValue.isActive
       };

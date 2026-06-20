@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "email": "admin@freshhub.com",
       "password": "admin123",
       "firstName": "Admin",
@@ -13,7 +13,7 @@
       "createdAt": "2024-01-01T00:00:00.000Z"
     },
     {
-      "id": 2,
+      "id": "2",
       "email": "user@freshhub.com",
       "password": "user123",
       "firstName": "John",
@@ -25,7 +25,7 @@
       "createdAt": "2024-01-02T00:00:00.000Z"
     },
     {
-      "id": 3,
+      "id": "3",
       "email": "jane.smith@example.com",
       "password": "user123",
       "firstName": "Jane",
@@ -37,7 +37,7 @@
       "createdAt": "2024-01-03T00:00:00.000Z"
     },
     {
-      "id": 4,
+      "id": "4",
       "email": "peter.wilson@example.com",
       "password": "user123",
       "firstName": "Peter",
@@ -49,7 +49,7 @@
       "createdAt": "2024-01-04T00:00:00.000Z"
     },
     {
-      "id": 5,
+      "id": "5",
       "email": "mary.johnson@example.com",
       "password": "user123",
       "firstName": "Mary",
@@ -63,7 +63,7 @@
   ],
   "products": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Fresh Orange",
       "description": "Sweet and juicy oranges packed with Vitamin C. Perfect for fresh juice or eating.",
       "price": 100,
@@ -75,7 +75,7 @@
       "createdAt": "2024-01-01T00:00:00.000Z"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Fresh Onions",
       "description": "Farm-fresh onions perfect for cooking. Adds flavor to any dish.",
       "price": 650,
@@ -87,7 +87,7 @@
       "createdAt": "2024-01-01T00:00:00.000Z"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Fresh Meat",
       "description": "Premium quality fresh meat. Tender and flavorful for your meals.",
       "price": 340,
@@ -99,7 +99,7 @@
       "createdAt": "2024-01-01T00:00:00.000Z"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Fresh Cabbages",
       "description": "Crisp and fresh cabbages. Great for salads and cooking.",
       "price": 850,
@@ -111,7 +111,7 @@
       "createdAt": "2024-01-01T00:00:00.000Z"
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Fresh Potatoes",
       "description": "High-quality potatoes perfect for cooking. Versatile and nutritious.",
       "price": 1200,
@@ -123,7 +123,7 @@
       "createdAt": "2024-01-01T00:00:00.000Z"
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "Fresh Avocados",
       "description": "Creamy and nutritious avocados. Rich in healthy fats and vitamins.",
       "price": 650,
@@ -135,7 +135,7 @@
       "createdAt": "2024-01-01T00:00:00.000Z"
     },
     {
-      "id": 7,
+      "id": "7",
       "name": "Fresh Carrots",
       "description": "Sweet and crunchy carrots. Packed with beta-carotene and vitamins.",
       "price": 750,
@@ -147,19 +147,19 @@
       "createdAt": "2024-01-01T00:00:00.000Z"
     },
     {
-      "id": 8,
+      "id": "8",
       "name": "Green Lemons",
       "description": "Fresh green lemons with zesty flavor. Perfect for cooking and drinks.",
       "price": 650,
       "image": "https://images.pexels.com/photos/1414110/pexels-photo-1414110.jpeg",
       "category": "fruits",
       "stock": 60,
-      "rating": 4.0,
+      "rating": 4,
       "isActive": true,
       "createdAt": "2024-01-01T00:00:00.000Z"
     },
     {
-      "id": 9,
+      "id": "9",
       "name": "Fresh Tomatoes",
       "description": "Ripe and juicy tomatoes. Essential for cooking and salads.",
       "price": 450,
@@ -171,7 +171,7 @@
       "createdAt": "2024-01-01T00:00:00.000Z"
     },
     {
-      "id": 10,
+      "id": "10",
       "name": "Fresh Bananas",
       "description": "Sweet and ripe bananas. Great source of potassium and energy.",
       "price": 300,
@@ -183,7 +183,7 @@
       "createdAt": "2024-01-01T00:00:00.000Z"
     },
     {
-      "id": 11,
+      "id": "11",
       "name": "Fresh Spinach",
       "description": "Nutritious leafy greens. Rich in iron and vitamins.",
       "price": 200,
@@ -195,7 +195,7 @@
       "createdAt": "2024-01-01T00:00:00.000Z"
     },
     {
-      "id": 12,
+      "id": "12",
       "name": "Fresh Milk",
       "description": "Pure and fresh dairy milk. Rich in calcium and protein.",
       "price": 120,
@@ -207,7 +207,7 @@
       "createdAt": "2024-01-01T00:00:00.000Z"
     },
     {
-      "id": 13,
+      "id": "13",
       "name": "Fresh Cheese",
       "description": "Creamy and delicious cheese. Perfect for sandwiches and cooking.",
       "price": 800,
@@ -219,7 +219,7 @@
       "createdAt": "2024-01-01T00:00:00.000Z"
     },
     {
-      "id": 14,
+      "id": "14",
       "name": "Fresh Eggs",
       "description": "Farm-fresh eggs. High in protein and essential nutrients.",
       "price": 350,
@@ -231,7 +231,7 @@
       "createdAt": "2024-01-01T00:00:00.000Z"
     },
     {
-      "id": 15,
+      "id": "15",
       "name": "Fresh Chicken",
       "description": "Premium quality fresh chicken. Lean protein for healthy meals.",
       "price": 950,
@@ -245,25 +245,25 @@
   ],
   "categories": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Vegetables",
       "image": "https://images.pexels.com/photos/1400172/pexels-photo-1400172.jpeg",
       "discount": 45
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Fresh Fruits",
       "image": "https://images.pexels.com/photos/1132047/pexels-photo-1132047.jpeg",
       "discount": 45
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Dairy Products",
       "image": "https://images.pexels.com/photos/236010/pexels-photo-236010.jpeg",
       "discount": 45
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Fresh Meat",
       "image": "https://images.pexels.com/photos/618773/pexels-photo-618773.jpeg",
       "discount": 45
@@ -271,7 +271,7 @@
   ],
   "blogs": [
     {
-      "id": 1,
+      "id": "1",
       "title": "Fresh and Organic Fruits Vegetables and Fruits",
       "content": "Sourced Fresh Daily From Local Farms Around Nairobi. Taste the Difference Quality Makes! Our commitment to bringing you the freshest produce starts at dawn when our team visits local farms to handpick the best fruits and vegetables. We work directly with farmers who share our passion for quality and sustainability.",
       "author": "Murigi",
@@ -279,7 +279,7 @@
       "image": "https://images.pexels.com/photos/1435904/pexels-photo-1435904.jpeg"
     },
     {
-      "id": 2,
+      "id": "2",
       "title": "Organic Farming: The Future of Agriculture",
       "content": "Nourish Your Body with Wholesome, Certified Organic Produce. Grown Naturally for a Healthier You in Nairobi. Organic farming practices not only benefit your health but also protect our environment. Learn about the benefits of choosing organic produce for your family.",
       "author": "Arnold",
@@ -287,7 +287,7 @@
       "image": "https://images.pexels.com/photos/1300972/pexels-photo-1300972.jpeg"
     },
     {
-      "id": 3,
+      "id": "3",
       "title": "Healthy Living with Fresh Produce",
       "content": "Your Go-To for Fresh and Delicious Organic Products in Nairobi. Shop Now for a Healthier Lifestyle! Discover how incorporating fresh fruits and vegetables into your daily diet can transform your health and energy levels. Our nutritionists share their top tips for healthy living.",
       "author": "Janet",
@@ -295,7 +295,7 @@
       "image": "https://images.pexels.com/photos/1458694/pexels-photo-1458694.jpeg"
     },
     {
-      "id": 4,
+      "id": "4",
       "title": "Seasonal Eating: What's Fresh This Month",
       "content": "Eating seasonally not only ensures you get the freshest produce but also supports local farmers and reduces environmental impact. This month, we're featuring amazing seasonal vegetables and fruits that are at their peak flavor and nutritional value.",
       "author": "David",
@@ -303,7 +303,7 @@
       "image": "https://images.pexels.com/photos/1300972/pexels-photo-1300972.jpeg"
     },
     {
-      "id": 5,
+      "id": "5",
       "title": "Farm to Table: Our Journey",
       "content": "Follow the journey of our produce from farm to your table. We believe in transparency and want you to know exactly where your food comes from. Meet our partner farmers and learn about their sustainable farming practices.",
       "author": "Sarah",
@@ -313,7 +313,7 @@
   ],
   "orders": [
     {
-      "id": 1,
+      "id": "1",
       "userId": 2,
       "items": [
         {
@@ -358,7 +358,7 @@
       "createdAt": "2024-01-10T10:30:00.000Z"
     },
     {
-      "id": 2,
+      "id": "2",
       "userId": 3,
       "items": [
         {
@@ -403,7 +403,7 @@
       "createdAt": "2024-01-12T14:15:00.000Z"
     },
     {
-      "id": 3,
+      "id": "3",
       "userId": 5,
       "items": [
         {
@@ -448,7 +448,7 @@
       "createdAt": "2024-01-15T09:45:00.000Z"
     },
     {
-      "id": 4,
+      "id": "4",
       "userId": 2,
       "items": [
         {
@@ -476,7 +476,7 @@
       "createdAt": "2024-01-18T16:20:00.000Z"
     },
     {
-      "id": 5,
+      "id": "5",
       "userId": 3,
       "items": [
         {
@@ -519,6 +519,97 @@
       "shippingAddress": "Karen, Nairobi, Kenya",
       "paymentMethod": "mpesa",
       "createdAt": "2024-01-20T11:10:00.000Z"
+    },
+    {
+      "userId": 3,
+      "items": [
+        {
+          "productId": "8",
+          "product": {
+            "id": "8",
+            "name": "Green Lemons",
+            "description": "Fresh green lemons with zesty flavor. Perfect for cooking and drinks.",
+            "price": 650,
+            "image": "https://images.pexels.com/photos/1414110/pexels-photo-1414110.jpeg",
+            "category": "fruits",
+            "stock": 60,
+            "rating": 4,
+            "isActive": true,
+            "createdAt": "2024-01-01T00:00:00.000Z"
+          },
+          "quantity": 3,
+          "price": 650
+        }
+      ],
+      "total": 1950,
+      "status": "pending",
+      "shippingAddress": "P.O Box, 55",
+      "paymentMethod": "cash",
+      "createdAt": "2026-05-29T19:14:29.990Z",
+      "id": "4LD_6_YSxws"
+    },
+    {
+      "userId": 3,
+      "items": [
+        {
+          "productId": "1",
+          "product": {
+            "id": "1",
+            "name": "Fresh Orange",
+            "description": "Sweet and juicy oranges packed with Vitamin C. Perfect for fresh juice or eating.",
+            "price": 100,
+            "image": "https://images.pexels.com/photos/161559/background-bitter-breakfast-bright-161559.jpeg",
+            "category": "fruits",
+            "stock": 50,
+            "rating": 4.5,
+            "isActive": true,
+            "createdAt": "2024-01-01T00:00:00.000Z"
+          },
+          "quantity": 2,
+          "price": 100
+        },
+        {
+          "productId": "6",
+          "product": {
+            "id": "6",
+            "name": "Fresh Avocados",
+            "description": "Creamy and nutritious avocados. Rich in healthy fats and vitamins.",
+            "price": 650,
+            "image": "https://images.pexels.com/photos/557659/pexels-photo-557659.jpeg",
+            "category": "fruits",
+            "stock": 35,
+            "rating": 4.6,
+            "isActive": true,
+            "createdAt": "2024-01-01T00:00:00.000Z"
+          },
+          "quantity": 1,
+          "price": 650
+        },
+        {
+          "productId": "12",
+          "product": {
+            "id": "12",
+            "name": "Fresh Milk",
+            "description": "Pure and fresh dairy milk. Rich in calcium and protein.",
+            "price": 120,
+            "image": "https://images.pexels.com/photos/236010/pexels-photo-236010.jpeg",
+            "category": "dairy",
+            "stock": 15,
+            "rating": 4.7,
+            "isActive": true,
+            "createdAt": "2024-01-01T00:00:00.000Z"
+          },
+          "quantity": 1,
+          "price": 120
+        }
+      ],
+      "total": 970,
+      "status": "pending",
+      "shippingAddress": "P.O Box, 55",
+      "paymentMethod": "cash",
+      "createdAt": "2026-05-29T19:17:04.420Z",
+      "id": "svwrljpYtZ4"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

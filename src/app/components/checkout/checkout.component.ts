@@ -49,10 +49,9 @@ export class CheckoutComponent implements OnInit {
     private snackBar: SnackbarService
   ) {
     this.checkoutForm = this.formBuilder.group({
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
+      name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required]],
+      contact: ['', [Validators.required]],
       shippingAddress: ['', [Validators.required]],
       paymentMethod: ['mpesa', [Validators.required]]
     });
@@ -70,11 +69,9 @@ export class CheckoutComponent implements OnInit {
     const currentUser = this.authService.getCurrentUser();
     if (currentUser) {
       this.checkoutForm.patchValue({
-        firstName: currentUser.firstName,
-        lastName: currentUser.lastName,
+        name: currentUser.name,
         email: currentUser.email,
-        phone: currentUser.phone,
-        shippingAddress: currentUser.address
+        contact: currentUser.contact,
       });
     }
   }

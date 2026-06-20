@@ -100,7 +100,7 @@ export class OrderManagementComponent implements OnInit {
 
   getCustomerName(userId: number): string {
     const user = this.users.find(u => u.id === userId);
-    return user ? `${user.firstName} ${user.lastName}` : 'Unknown User';
+    return user ? `${user.name}` : 'Unknown User';
   }
 
   getPaymentMethodText(method: string): string {

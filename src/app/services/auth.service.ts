@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { User, LoginRequest, RegisterRequest, AuthResponse } from '../models/user.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,8 @@ export class AuthService {
   private apiUrl = 'http://localhost:3000';
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
+
+  apiServices = environment.apiUrl;
 
   constructor(private http: HttpClient) {
     this.loadUserFromStorage();
@@ -46,14 +49,30 @@ export class AuthService {
     );
   }
 
+  //Login function here
+  loginUser(credentials: LoginRequest): Observable<AuthResponse> {
+    const loginUrl = this.apiServices + 'v1/auth/login';
+
+    return this.http.post<AuthResponse>(loginUrl, credentials).pipe(
+      map(response => {
+        //save user
+        localStorage.setItem('currentUser', JSON.stringify(response.user));
+        //Save token
+        localStorage.setItem('token', response.token);
+        //Update current user
+        this.currentUserSubject.next(response.user);
+
+        return response;
+      })
+    );
+  }
+
   register(userData: RegisterRequest): Observable<User> {
     const newUser: User = {
       email: userData.email,
       password: userData.password,
-      firstName: userData.firstName,
-      lastName: userData.lastName,
-      phone: userData.phone,
-      address: userData.address,
+      name: userData.name,
+      contact: userData.contact,
       role: 'user',
       createdAt: new Date().toISOString(),
       isActive: true
