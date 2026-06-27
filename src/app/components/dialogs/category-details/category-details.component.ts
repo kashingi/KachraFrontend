@@ -26,7 +26,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatIconModule
   ],
   templateUrl: './category-details.component.html',
-  styleUrl: './category-details.component.css'
+  styleUrl: './category-details.component.scss'
 })
 export class CategoryDetailsComponent {
 
@@ -36,6 +36,7 @@ export class CategoryDetailsComponent {
   loading = false;
   selectedFile: File | null = null;
   selectedImageBase64: string | null = null;
+  imagePreview: string | null = null;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -72,7 +73,10 @@ export class CategoryDetailsComponent {
       const reader = new FileReader();
       reader.onload = () => {
         const result = reader.result;
-        this.selectedImageBase64 = typeof result === 'string' ? result.split(',')[1] : '';
+        if (typeof result === 'string') {
+          this.imagePreview = result; // Set preview with full data URL
+          this.selectedImageBase64 = result.split(',')[1]; // Extract base64 for backend
+        }
       };
       reader.readAsDataURL(file);
     }
@@ -85,6 +89,15 @@ export class CategoryDetailsComponent {
       discount: category.discount,
       categoryImage: category.categoryImage
     });
+    
+    // If image is base64, convert it to a data URL for preview
+    if (category.categoryImage && category.categoryImage.length > 100) {
+      // It's likely base64 data
+      this.imagePreview = 'data:image/jpeg;base64,' + category.categoryImage;
+    } else if (category.categoryImage) {
+      // It's a filename or URL
+      this.imagePreview = category.categoryImage;
+    }
   }
 
   onSave(): void {

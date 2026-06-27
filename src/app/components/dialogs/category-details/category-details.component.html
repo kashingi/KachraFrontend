@@ -40,9 +40,13 @@
       
       <input type="file" #fileInput hidden accept="image/*" (change)="onFileSelected($event)">
       
+      <div class="image-preview-section" *ngIf="imagePreview">
+        <img [src]="imagePreview" alt="Category Image Preview" class="image-preview">
+      </div>
+      
       <mat-form-field appearance="outline" class="w-100">
         <mat-label>Category Image</mat-label>
-        <input matInput [value]="selectedFile?.name" readonly formControlName="categoryImage">
+        <input matInput readonly formControlName="categoryImage" placeholder="Click upload to select image">
         <button matSuffix mat-icon-button type="button" (click)="fileInput.click()">
           <mat-icon>upload</mat-icon>
         </button>

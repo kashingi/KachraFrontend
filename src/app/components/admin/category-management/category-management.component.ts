@@ -108,13 +108,6 @@ export class CategoryManagementComponent implements OnInit {
 
   createCategory(category: ProductCategory): void {
 
-    const categoryData = {
-      name: category.name,
-      categoryImage: category.categoryImage,
-      discount: category.discount,
-      status: category.status
-    };
-
     this.productService.addCategory(category).subscribe({
       next: (resp: any) => {
         console.log('Category created:', resp);
@@ -129,7 +122,8 @@ export class CategoryManagementComponent implements OnInit {
   }
 
   updateCategory(categoryData: ProductCategory): void {
-    this.productService.updateCategory(categoryData.id, categoryData).subscribe({
+    const categoryId = categoryData.id;
+    this.productService.updateCategory(categoryId, categoryData).subscribe({
       next: (resp: any) => {
         console.log('Category updated:', resp);
         this.loadCategories();
@@ -144,8 +138,8 @@ export class CategoryManagementComponent implements OnInit {
 
 
   toggleCategoryStatus(category: ProductCategory): void {
-    const updatedCategory = { ...category, status: !category.status };
-    this.productService.updateCategory(category.id, updatedCategory).subscribe({
+    const updateStatus = !category.status;
+    this.productService.updateCategoryStatus(category.id, updateStatus).subscribe({
       next: (resp: any) => {
         console.log('Category status updated:', resp);
         this.loadCategories();
@@ -176,8 +170,7 @@ export class CategoryManagementComponent implements OnInit {
   deleteCategory(id: any): void {
     this.productService.deleteCategory(id).subscribe({
       next: (resp: any) => {
-        //this.categories = this.categories.filter(c => c.id !== id);
-        //this.loadCategories();
+        this.loadCategories();
         this.loading = false;
         this.snackbar.success(resp?.Message, 'Close');
       },
@@ -187,6 +180,17 @@ export class CategoryManagementComponent implements OnInit {
         this.snackbar.danger(err?.error?.Message, 'Close');
       }
     });
+  }
+
+  getImageSrc(imageBase64?: string): string {
+    if (!imageBase64) return '';
+
+    // Add data URL prefix if missing
+    if (imageBase64.startsWith('data:image')) {
+      return imageBase64;
+    }
+
+    return 'data:image/webp;base64,' + imageBase64;
   }
 
   getStarArray(rating: number): number[] {

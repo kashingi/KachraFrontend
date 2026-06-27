@@ -50,6 +50,12 @@ export class ProductService {
     return this.http.put<ProductCategory>(categoryUrl, category);
   }
 
+  updateCategoryStatus(id: number, status: boolean): Observable<ProductCategory> {
+    const categoryUrl = this.productsApi + `/category/updateCategoryStatus/${id}`;
+    
+    return this.http.put<ProductCategory>(categoryUrl, { status });
+  }
+
   deleteCategory(id: number): Observable<void> {
     const categoryUrl = this.productsApi + `/category/deleteCategory/${id}`;
     
