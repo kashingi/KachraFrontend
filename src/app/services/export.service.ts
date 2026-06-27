@@ -3,7 +3,7 @@ import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import * as XLSX from 'xlsx';
 import { User } from '../models/user.model';
-import { Product } from '../models/product.model';
+import { Product, ProductCategory } from '../models/product.model';
 import { Order } from '../models/order.model';
 
 @Injectable({
@@ -32,7 +32,7 @@ export class ExportService {
       user.email,
       user.contact || '',
       user.role,
-      user.isActive ? 'Active' : 'Inactive',
+      user.active ? 'Active' : 'Inactive',
       new Date(user.createdAt || '').toLocaleDateString()
     ]);
 
@@ -58,7 +58,7 @@ export class ExportService {
         'Email': user.email,
         'Contact': user.contact,
         'Role': user.role,
-        'Status': user.isActive ? 'Active' : 'Inactive',
+        'Status': user.active ? 'Active' : 'Inactive',
         'Created Date': new Date(user.createdAt || '').toLocaleDateString()
       }))
     );
@@ -123,6 +123,50 @@ export class ExportService {
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, 'Products');
     XLSX.writeFile(workbook, 'products-report.xlsx');
+  }
+
+  // Export Categories to PDF
+  exportCategoriesToPDF(categories: ProductCategory[]): void {
+    const doc = new jsPDF();
+
+    doc.setFontSize(20);
+    doc.text('Categories Report', 14, 22);
+
+    doc.setFontSize(10);
+    doc.text(`Generated on: ${new Date().toLocaleDateString()}`, 14, 30);
+
+    const tableData = categories.map(category => [
+      category.id?.toString() || '',
+      category.name,
+      category.discount?.toString() || '0',
+      category.status ? 'Active' : 'Inactive'
+    ]);
+
+    autoTable(doc, {
+      head: [['ID', 'Name', 'Discount', 'Status']],
+      body: tableData,
+      startY: 35,
+      styles: { fontSize: 8 },
+      headStyles: { fillColor: [39, 174, 96] }
+    });
+
+    doc.save('categories-report.pdf');
+  }
+
+  // Export Categories to Excel
+  exportCategoriesToExcel(categories: ProductCategory[]): void {
+    const worksheet = XLSX.utils.json_to_sheet(
+      categories.map(category => ({
+        'ID': category.id,
+        'Name': category.name,
+        'Discount': category.discount || 0,
+        'Status': category.status ? 'Active' : 'Inactive'
+      }))
+    );
+
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Categories');
+    XLSX.writeFile(workbook, 'categories-report.xlsx');
   }
 
   // Export Orders to PDF

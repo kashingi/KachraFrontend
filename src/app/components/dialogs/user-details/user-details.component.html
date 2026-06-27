@@ -4,15 +4,13 @@
   <mat-dialog-content>
     <form [formGroup]="userForm" class="user-form">
       <div class="row">
-        <div class="col-md-6">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Full Name</mat-label>
-            <input matInput formControlName="name" placeholder="John" />
-            <mat-error *ngIf="userForm.get('name')?.hasError('required')">
-              Full name is required
-            </mat-error>
-          </mat-form-field>
-        </div>
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Full Name</mat-label>
+          <input matInput formControlName="name" placeholder="John" />
+          <mat-error *ngIf="userForm.get('name')?.hasError('required')">
+            Full name is required
+          </mat-error>
+        </mat-form-field>
       </div>
 
       <div class="row">
@@ -45,8 +43,8 @@
         <mat-form-field appearance="outline" class="col-md-6">
           <mat-label>Role</mat-label>
           <mat-select formControlName="role">
-            <mat-option value="user">User</mat-option>
-            <mat-option value="admin">Admin</mat-option>
+            <mat-option value="User">User</mat-option>
+            <mat-option value="Admin">Admin</mat-option>
           </mat-select>
           <mat-error *ngIf="userForm.get('role')?.hasError('required')">
             Role is required
@@ -81,7 +79,7 @@
         </div>
       </div>
 
-      <mat-slide-toggle formControlName="isActive" class="w-100">
+      <mat-slide-toggle formControlName="active" class="w-100">
         Active User
       </mat-slide-toggle>
     </form>

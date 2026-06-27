@@ -13,4 +13,9 @@ describe('ExportService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should expose category export methods', () => {
+    expect(typeof service.exportCategoriesToPDF).toBe('function');
+    expect(typeof service.exportCategoriesToExcel).toBe('function');
+  });
 });

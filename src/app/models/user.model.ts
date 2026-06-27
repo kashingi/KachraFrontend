@@ -6,7 +6,7 @@ export interface User {
   contact: string;
   role: 'user' | 'admin';
   createdAt?: string;
-  isActive?: boolean;
+  active?: boolean;
 }
 
 export interface LoginRequest {

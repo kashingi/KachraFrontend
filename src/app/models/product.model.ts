@@ -14,6 +14,7 @@ export interface Product {
 export interface ProductCategory {
   id: number;
   name: string;
-  image: string;
-  discount?: number;
+  categoryImage?: string;
+  discount: number;
+  status: boolean;
 }

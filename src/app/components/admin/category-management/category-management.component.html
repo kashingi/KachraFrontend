@@ -1,13 +1,14 @@
-<div class="user-management">
+<div class="product-management">
   <div class="container-fluid">
     <div class="management-header">
       <h2>
-        <mat-icon>people</mat-icon>
-        User Management
+        <mat-icon>inventory</mat-icon>
+        Category Management
       </h2>
-      <button mat-raised-button color="primary" (click)="openAddUserDialog()">
+
+      <button mat-raised-button color="primary" (click)="openAddCategoryDialog()">
         <mat-icon>add</mat-icon>
-        Add User
+        Add Category
       </button>
     </div>
 
@@ -16,8 +17,8 @@
       <mat-spinner></mat-spinner>
     </div>
 
-    <!-- Users Table -->
-    <mat-card *ngIf="!loading" class="users-table-card">
+    <!-- Products Table -->
+    <mat-card *ngIf="!loading" class="products-table-card">
       <div class="card-header float-end">
         <div class="float-end d-flex">
           <button mat-icon-button (click)="exportToPDF()" matTooltip="Export as PDF">
@@ -31,7 +32,8 @@
       <mat-card-content>
         <div class="table-responsive">
           <table mat-table [dataSource]="dataSource" class="w-100">
-            <!-- ID Column -->
+            <!-- Image Column -->
+
             <ng-container matColumnDef="id">
               <th mat-header-cell *matHeaderCellDef>ID</th>
               <td mat-cell *matCellDef="let user; let i = index">
@@ -39,42 +41,33 @@
               </td>
             </ng-container>
 
-            <!-- Name Column -->
-            <ng-container matColumnDef="name">
-              <th mat-header-cell *matHeaderCellDef>Name</th>
-              <td mat-cell *matCellDef="let user">
-                {{ user.name }}
+            <ng-container matColumnDef="image">
+              <th mat-header-cell *matHeaderCellDef>Image</th>
+              <td mat-cell *matCellDef="let category">
+                <img [src]="category.image" [alt]="category.name" class="product-image" />
               </td>
             </ng-container>
 
-            <!-- Email Column -->
-            <ng-container matColumnDef="email">
-              <th mat-header-cell *matHeaderCellDef>Email</th>
-              <td mat-cell *matCellDef="let user">{{ user.email }}</td>
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef>Name</th>
+              <td mat-cell *matCellDef="let category">{{ category.name }}</td>
             </ng-container>
 
-            <!-- Contact Column -->
-            <ng-container matColumnDef="contact">
-              <th mat-header-cell *matHeaderCellDef>Contact</th>
-              <td mat-cell *matCellDef="let user">{{ user.contact }}</td>
-            </ng-container>
-
-            <!-- Role Column -->
-            <ng-container matColumnDef="role">
-              <th mat-header-cell *matHeaderCellDef>Role</th>
-              <td mat-cell *matCellDef="let user">
-                <mat-chip [ngClass]="user.role">{{
-                  user.role | titlecase
-                  }}</mat-chip>
+            <!-- Discount Column -->
+            <ng-container matColumnDef="discount">
+              <th mat-header-cell *matHeaderCellDef>Discount</th>
+              <td mat-cell *matCellDef="let category">
+                <mat-chip>{{ category.discount }}</mat-chip>
               </td>
             </ng-container>
 
             <!-- Status Column -->
             <ng-container matColumnDef="status">
               <th mat-header-cell *matHeaderCellDef>Status</th>
-              <td mat-cell *matCellDef="let user">
-                <mat-chip [ngClass]="user.active ? 'active' : 'inactive'">
-                  {{ user.active ? "Active" : "Inactive" }}
+              <td mat-cell *matCellDef="let category">
+                <mat-chip [ngClass]="category.status ? 'active' : 'inactive'">
+                  {{ category.status ? "Active" : "Inactive" }}
                 </mat-chip>
               </td>
             </ng-container>
@@ -82,22 +75,22 @@
             <!-- Actions Column -->
             <ng-container matColumnDef="actions">
               <th mat-header-cell *matHeaderCellDef>Actions</th>
-              <td mat-cell *matCellDef="let user">
-                <button mat-icon-button [matMenuTriggerFor]="userMenu">
+              <td mat-cell *matCellDef="let category">
+                <button mat-icon-button [matMenuTriggerFor]="productMenu">
                   <mat-icon>more_vert</mat-icon>
                 </button>
-                <mat-menu #userMenu="matMenu">
-                  <button mat-menu-item (click)="editUser(user)">
+                <mat-menu #productMenu="matMenu">
+                  <button mat-menu-item (click)="editCategory(category)">
                     <mat-icon color="primary">edit</mat-icon>
                     Edit
                   </button>
-                  <button mat-menu-item (click)="toggleUserStatus(user)">
+                  <button mat-menu-item (click)="toggleCategoryStatus(category)">
                     <mat-icon color="accent">{{
-                      user.active ? "block" : "check_circle"
+                      category.status ? "visibility_off" : "visibility"
                       }}</mat-icon>
-                    {{ user.active ? "Deactivate" : "Activate" }}
+                    {{ category.status ? "Deactivate" : "Activate" }}
                   </button>
-                  <button mat-menu-item (click)="handleDeleteAction(user)">
+                  <button mat-menu-item (click)="handleDeleteAction(category)">
                     <mat-icon color="warn">delete</mat-icon>
                     Delete
                   </button>
@@ -111,7 +104,7 @@
         </div>
 
         <!-- Pagination -->
-        <mat-paginator [pageSizeOptions]="[2, 5, 10, 20]" showFirstLastButtons [pageSize]="2" [length]="totalUsers">
+        <mat-paginator [pageSizeOptions]="[2, 5, 10, 20]" showFirstLastButtons [pageSize]="2" [length]="totalCategories">
         </mat-paginator>
       </mat-card-content>
     </mat-card>

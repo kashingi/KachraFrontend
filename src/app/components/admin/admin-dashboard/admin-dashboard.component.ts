@@ -8,9 +8,9 @@ import { MatChipsModule } from '@angular/material/chips';
 import { UserService } from '../../../services/user.service';
 import { ProductService } from '../../../services/product.service';
 import { OrderService } from '../../../services/order.service';
-import { User } from '../../../models/user.model';
 import { Product } from '../../../models/product.model';
 import { Order } from '../../../models/order.model';
+import { SnackbarService } from '../../../services/snackbar.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -28,6 +28,7 @@ import { Order } from '../../../models/order.model';
 })
 export class AdminDashboardComponent implements OnInit {
   totalUsers = 0;
+  totalCategories = 0;
   totalProducts = 0;
   totalOrders = 0;
   totalRevenue = 0;
@@ -37,7 +38,8 @@ export class AdminDashboardComponent implements OnInit {
   constructor(
     private userService: UserService,
     private productService: ProductService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private snackbar: SnackbarService
   ) {}
 
   ngOnInit(): void {
@@ -50,7 +52,22 @@ export class AdminDashboardComponent implements OnInit {
       next: (users) => {
         this.totalUsers = users.length;
       },
-      error: (error) => console.error('Error loading users:', error)
+      error: (error) => {
+        console.error('Error loading users:', error);
+        this.snackbar.danger(error.error?.Message, 'Close');
+      }
+    });
+
+    // Load categories
+    this.productService.getCategories().subscribe({
+      next: (categories) => {
+        this.totalCategories = categories.length;
+        console.log('Total categories : ', categories);
+      },
+      error: (error) => {
+        console.log('Error loading categories:', error);
+        this.snackbar.danger(error.error?.Message, 'Close');
+      }
     });
 
     // Load products
@@ -59,7 +76,11 @@ export class AdminDashboardComponent implements OnInit {
         this.totalProducts = products.length;
         this.lowStockProducts = products.filter(p => p.stock < 10);
       },
-      error: (error) => console.error('Error loading products:', error)
+      error: (err: any) => {
+        console.log('Error loading products:', err);
+        this.snackbar.danger(err.error?.Message, 'Close');
+      }
+
     });
 
     // Load orders

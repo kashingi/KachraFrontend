@@ -32,7 +32,7 @@ export class AuthService {
         const user = users.find(u => 
           u.email === credentials.email && 
           u.password === credentials.password &&
-          u.isActive !== false
+          u.active !== false
         );
         
         if (user) {

@@ -26,15 +26,21 @@ export class UserService {
   }
 
 
-  updateUser(id: number, user: Partial<User>): Observable<User> {
-    return this.http.patch<User>(`${this.apiUrl}/users/${id}`, user);
+  updateUser(userId: number, user: Partial<User>): Observable<User> {
+    const updateUrl = this.usersApi + '/auth/updateUser/'+ `${userId}`;
+    
+    return this.http.put<User>(updateUrl, user);
   }
 
   deleteUser(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/users/${id}`);
+    const deleteUrl = this.usersApi + '/auth/deleteUser/'+ `${id}`;
+    
+    return this.http.delete<void>(deleteUrl);
   }
 
-  toggleUserStatus(id: number, isActive: boolean): Observable<User> {
-    return this.http.patch<User>(`${this.apiUrl}/users/${id}`, { isActive });
+  toggleUserStatus(id: number, active: boolean): Observable<User> {
+    const statusUrl = this.usersApi + '/auth/updateUserStatus/'+ `${id}`;
+    
+    return this.http.patch<User>(statusUrl, { active });
   }
 }

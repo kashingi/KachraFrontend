@@ -46,9 +46,8 @@ export class UserDetailsComponent {
       name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       contact: ['', [Validators.required]],
-      //address: ['', [Validators.required]],
       role: ['user', [Validators.required]],
-      isActive: [true],
+      active: [true],
       password: [''] // Include password control with no validators initially
     });
 
@@ -69,9 +68,8 @@ export class UserDetailsComponent {
       name: user.name,
       email: user.email,
       contact: user.contact,
-      //address: user.address,
       role: user.role,
-      isActive: user.isActive
+      active: user.active
       // Note: We don’t set 'password' here since it’s not used when editing
     });
   }
@@ -85,9 +83,8 @@ export class UserDetailsComponent {
         name: formValue.name,
         email: formValue.email,
         contact: formValue.contact,
-        //address: formValue.address,
         role: formValue.role,
-        isActive: formValue.isActive
+        active: formValue.active
       };
 
       // Include password only when creating a new user

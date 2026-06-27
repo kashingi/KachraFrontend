@@ -121,39 +121,31 @@ export class UserManagementComponent implements OnInit {
   }
 
   updateUser(userData: User): void {
-    this.userService.updateUser(userData.id!, userData).subscribe({
-      next: (updatedUser) => {
-        const index = this.users.findIndex(u => u.id === userData.id);
-        if (index !== -1) {
-          this.users[index] = updatedUser;
-        }
+    const userId = userData.id;
+    this.userService.updateUser(userId!, userData).subscribe({
+      next: (resp: any) => {
         this.loadUsers();
-        this.snackbar.success('User updated successfully.', 'X');
+        this.snackbar.success(resp.Message, 'Close');
       },
-      error: (error) => {
-        this.snackbar.danger('Failed to update user, try again later.', 'X');
+      error: (err: any) => {
+        this.snackbar.danger(err.error?.Message + ' try again later.', 'Close');
       }
     });
   }
 
 
   toggleUserStatus(user: User): void {
-    const newStatus = !user.isActive;
-    this.userService.toggleUserStatus(user.id!, newStatus).subscribe({
-      next: (updatedUser) => {
-        const index = this.users.findIndex(u => u.id === user.id);
-        if (index !== -1) {
-          this.users[index] = updatedUser;
-        }
+    const active= !user.active;
+    console.log('User status is : ', active);
+    this.userService.toggleUserStatus(user.id!, active).subscribe({
+      next: (resp: any) => {
+        console.log('User status response : ', resp);
         this.loadUsers();
-        this.snackbar.success(
-          `User ${newStatus ? 'activated' : 'deactivated'} successfully`,
-          'X',
-        );
+        this.snackbar.success( resp.Message, 'Close');
       },
-      error: (error) => {
-        console.log(error)
-        this.snackbar.danger(`Failed to ${newStatus ? 'activated' : 'deactivated'} user, try again later`, 'X');
+      error: (err) => {
+        console.log("Error toggling user status: ", err);
+        this.snackbar.danger( err.error?.Message || 'Failed to update user status, try again later.', 'Close');
       }
     });
   }
@@ -175,15 +167,16 @@ export class UserManagementComponent implements OnInit {
 
   deleteUser(id: any): void {
     this.userService.deleteUser(id).subscribe({
-      next: (users) => {
+      next: (resp: any) => {
         this.loading = false;
-        this.snackbar.success('User deleted successfully', 'X');
+        console.log('Delete response : ', resp);
+        this.snackbar.success(resp.Message, 'Close');
         this.loadUsers();
       },
-      error: (error: any) => {
-        console.log(error);
+      error: (err: any) => {
+        console.log(err);
         this.loading = false;
-        this.snackbar.danger('System busy, try again later.', 'X');
+        this.snackbar.danger(err.error?.Message, 'Close');
       }
     })
   }

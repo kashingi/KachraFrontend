@@ -1,0 +1,64 @@
+<div class="product-dialog">
+  <h2 mat-dialog-title>{{ isEdit ? "Edit Category" : "Add New Category" }}</h2>
+
+  <mat-dialog-content>
+    <form [formGroup]="categoryForm" class="product-form">
+      <div class="row">
+        <div class="col-md-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Category Name</mat-label>
+            <input matInput formControlName="name" placeholder="Fresh Oranges" />
+            <mat-error *ngIf="categoryForm.get('name')?.hasError('required')">
+              Category name is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Discount</mat-label>
+            <input matInput type="number" formControlName="discount" placeholder="50" />
+            <mat-error *ngIf="categoryForm.get('discount')?.hasError('required')">
+              Discount is required
+            </mat-error>
+            <mat-error *ngIf="categoryForm.get('discount')?.hasError('min')">
+              Discount must be 0 or greater
+            </mat-error>
+            <mat-error *ngIf="categoryForm.get('discount')?.hasError('max')">
+              Discount must be 100 or less
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Image</mat-label>
+        <input matInput type="file" formControlName="image" placeholder="Select file" />
+        <mat-error *ngIf="categoryForm.get('image')?.hasError('required')">
+          Image  is required
+        </mat-error>
+      </mat-form-field> -->
+      
+      <input type="file" #fileInput hidden accept="image/*" (change)="onFileSelected($event)">
+      
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Category Image</mat-label>
+        <input matInput [value]="selectedFile?.name" readonly formControlName="categoryImage">
+        <button matSuffix mat-icon-button type="button" (click)="fileInput.click()">
+          <mat-icon>upload</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-slide-toggle formControlName="status" class="w-100">
+        Active Category
+      </mat-slide-toggle>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-raised-button color="primary" (click)="onSave()" [disabled]="categoryForm.invalid || loading">
+      <mat-spinner diameter="20" *ngIf="loading"></mat-spinner>
+      <span *ngIf="!loading">{{ isEdit ? "Update" : "Create" }}</span>
+    </button>
+  </mat-dialog-actions>
+</div>

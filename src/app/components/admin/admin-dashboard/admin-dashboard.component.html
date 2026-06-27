@@ -9,7 +9,7 @@
 
     <!-- Stats Cards -->
     <div class="row mb-4">
-      <div class="col-lg-3 col-md-6 mb-3">
+      <div class="col-lg-2 col-md-4 mb-3">
         <mat-card class="stat-card users">
           <mat-card-content>
             <div class="stat-content">
@@ -19,6 +19,22 @@
               <div class="stat-info">
                 <h3>{{ totalUsers }}</h3>
                 <p>Total Users</p>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <div class="col-lg-2 col-md-4 mb-3">
+        <mat-card class="stat-card users">
+          <mat-card-content>
+            <div class="stat-content">
+              <div class="stat-icon">
+                <mat-icon><mat-icon>category</mat-icon></mat-icon>
+              </div>
+              <div class="stat-info">
+                <h3>{{ totalCategories }}</h3>
+                <p>Categories</p>
               </div>
             </div>
           </mat-card-content>
@@ -41,7 +57,7 @@
         </mat-card>
       </div>
 
-      <div class="col-lg-3 col-md-6 mb-3">
+      <div class="col-lg-2 col-md-4 mb-3">
         <mat-card class="stat-card orders">
           <mat-card-content>
             <div class="stat-content">
@@ -86,6 +102,10 @@
               <button mat-raised-button color="primary" routerLink="/admin/users">
                 <mat-icon>people</mat-icon>
                 Manage Users
+              </button>
+              <button mat-raised-button color="primary" routerLink="/admin/categories">
+                <mat-icon>category</mat-icon>
+                Manage Categories
               </button>
               <button mat-raised-button color="accent" routerLink="/admin/products">
                 <mat-icon>inventory</mat-icon>
