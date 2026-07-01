@@ -45,7 +45,7 @@
         <mat-card-content>
           <div class="order-items">
             <div class="order-item" *ngFor="let item of order.items">
-              <img [src]="item.product.image" [alt]="item.product.name" class="item-image">
+              <img [src]="item.product.productImage" [alt]="item.product.name" class="item-image">
               <div class="item-details">
                 <h4>{{ item.product.name }}</h4>
                 <p>Quantity: {{ item.quantity }} × KSH {{ item.price }}/-</p>

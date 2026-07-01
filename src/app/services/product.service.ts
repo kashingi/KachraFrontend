@@ -14,23 +14,36 @@ export class ProductService {
   constructor(private http: HttpClient) {}
 
   getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.apiUrl}/products`);
+    return this.http.get<Product[]>(`${this.productsApi}/product/getAllProducts`);
   }
 
   getProduct(id: number): Observable<Product> {
     return this.http.get<Product>(`${this.apiUrl}/products/${id}`);
   }
 
-  createProduct(product: Product): Observable<Product> {
-    return this.http.post<Product>(`${this.apiUrl}/products`, product);
+  AddProduct(product: Product): Observable<Product> {
+    const addUrl = this.productsApi + '/product/addProduct';
+
+    return this.http.post<Product>(addUrl, product);
   }
 
-  updateProduct(id: number, product: Product): Observable<Product> {
-    return this.http.put<Product>(`${this.apiUrl}/products/${id}`, product);
+  updateProduct(productId: number, product: Product): Observable<Product> {
+    const updateUrl = this.productsApi + `/product/updateProduct/${productId}`;
+
+    return this.http.put<Product>(updateUrl, product);
   }
+
+  updateProductStatus(productId: number, status: boolean): Observable<Product> {
+    const statusUrl = this.productsApi + `/product/updateProductStatus/${productId}`;
+
+    return this.http.patch<Product>(statusUrl, { status });
+  }
+
 
   deleteProduct(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/products/${id}`);
+    const deleteUrl = this.productsApi + `/product/deleteProduct/${id}`;
+
+    return this.http.delete<void>(deleteUrl);
   }
 
   addCategory(category: ProductCategory): Observable<ProductCategory> {

@@ -67,4 +67,15 @@ export class CartComponent implements OnInit {
       this.router.navigate(['/login'], { queryParams: { returnUrl: '/checkout' } });
     }
   }
+
+   getImageSrc(imageBase64?: string): string {
+    if (!imageBase64) return '';
+
+    // Add data URL prefix if missing
+    if (imageBase64.startsWith('data:image')) {
+      return imageBase64;
+    }
+
+    return 'data:image/webp;base64,' + imageBase64;
+  }
 }

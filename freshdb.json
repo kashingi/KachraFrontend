@@ -69,10 +69,10 @@
       "name": "Fresh Orange",
       "description": "Sweet and juicy oranges packed with Vitamin C. Perfect for fresh juice or eating.",
       "price": 100,
-      "image": "https://images.pexels.com/photos/161559/background-bitter-breakfast-bright-161559.jpeg",
-      "category": "fruits",
       "stock": 50,
-      "rating": 4.5,
+      "category": "fruits",
+      "rating": 5,
+      "image": "https://images.pexels.com/photos/161559/background-bitter-breakfast-bright-161559.jpeg",
       "isActive": true,
       "createdAt": "2024-01-01T00:00:00.000Z"
     },

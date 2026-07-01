@@ -27,7 +27,7 @@
         <h3>Order Items</h3>
         <div class="items-list">
           <div class="item" *ngFor="let item of order.items">
-            <img [src]="item.product.image" [alt]="item.product.name" class="item-image">
+            <img [src]="item.product.productImage" [alt]="item.product.name" class="item-image">
             <div class="item-details">
               <h4>{{ item.product.name }}</h4>
               <p>{{ item.product.description }}</p>

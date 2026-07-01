@@ -3,12 +3,12 @@ export interface Product {
   name: string;
   description: string;
   price: number;
-  image: string;
-  category: string;
+  productImage: string;
+  categoryId: number;
+  categoryName?: string;
   stock: number;
   rating: number;
-  isActive: boolean;
-  createdAt?: string;
+  status: boolean;
 }
 
 export interface ProductCategory {

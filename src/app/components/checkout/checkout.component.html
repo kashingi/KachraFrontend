@@ -102,7 +102,7 @@
             <div class="order-items">
               <div class="order-item" *ngFor="let item of cart.items">
                 <div class="item-info">
-                  <img [src]="item.product.image" [alt]="item.product.name" class="item-image">
+                  <img [src]="item.product.productImage" [alt]="item.product.name" class="item-image">
                   <div class="item-details">
                     <h5>{{ item.product.name }}</h5>
                     <p>Qty: {{ item.quantity }}</p>

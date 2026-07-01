@@ -40,13 +40,15 @@ export class ProductsComponent implements OnInit {
 
   loadProducts(): void {
     this.productService.getProducts().subscribe({
-      next: (products) => {
-        this.products = products.filter(p => p.isActive);
+      next: (resp: any) => {
+        console.log('Products loaded:', resp);
+        this.products = resp;
         this.loading = false;
       },
-      error: (error) => {
-        console.error('Error loading products:', error);
+      error: (err: any) => {
+        console.log('Error loading products:', err);
         this.loading = false;
+        this.snackbar.danger(err?.error?.Message, 'Close');
       }
     });
   }
@@ -55,6 +57,17 @@ export class ProductsComponent implements OnInit {
     this.cartService.addToCart(product);
     this.snackbar.success(`${product.name} added to cart`, 'Close');
     
+  }
+
+  getImageSrc(imageBase64?: string): string {
+    if (!imageBase64) return '';
+
+    // Add data URL prefix if missing
+    if (imageBase64.startsWith('data:image')) {
+      return imageBase64;
+    }
+
+    return 'data:image/webp;base64,' + imageBase64;
   }
 
   getStarArray(rating: number): number[] {

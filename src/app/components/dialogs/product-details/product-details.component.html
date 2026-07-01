@@ -5,7 +5,7 @@
     <form [formGroup]="productForm" class="product-form">
       <mat-form-field appearance="outline" class="w-100">
         <mat-label>Product Name</mat-label>
-        <input matInput formControlName="name" placeholder="Fresh Oranges" />
+        <input matInput formControlName="name" placeholder="Modern Wooden Chair" />
         <mat-error *ngIf="productForm.get('name')?.hasError('required')">
           Product name is required
         </mat-error>
@@ -13,23 +13,17 @@
 
       <mat-form-field appearance="outline" class="w-100">
         <mat-label>Description</mat-label>
-        <input matInput formControlName="description" placeholder="Product description" />
-        
+        <textarea matInput rows="3" formControlName="description" placeholder="Product description"></textarea>
         <mat-error *ngIf="productForm.get('description')?.hasError('required')">
           Description is required
         </mat-error>
       </mat-form-field>
 
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Price (KSH)</mat-label>
-            <input
-              matInput
-              type="number"
-              formControlName="price"
-              placeholder="100"
-            />
+            <input matInput type="number" min="0.01" step="0.01" formControlName="price" placeholder="2500" />
             <mat-error *ngIf="productForm.get('price')?.hasError('required')">
               Price is required
             </mat-error>
@@ -38,16 +32,10 @@
             </mat-error>
           </mat-form-field>
         </div>
-
-        <div class="col-md-6">
+        <div class="col-md-4">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Stock Quantity</mat-label>
-            <input
-              matInput
-              type="number"
-              formControlName="stock"
-              placeholder="50"
-            />
+            <input matInput type="number" formControlName="stock" placeholder="50" />
             <mat-error *ngIf="productForm.get('stock')?.hasError('required')">
               Stock is required
             </mat-error>
@@ -56,38 +44,11 @@
             </mat-error>
           </mat-form-field>
         </div>
-      </div>
 
-      <div class="row">
-        <div class="col-md-6">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Category</mat-label>
-            <mat-select formControlName="category">
-              <mat-option value="fruits">Fruits</mat-option>
-              <mat-option value="vegetables">Vegetables</mat-option>
-              <mat-option value="dairy">Dairy</mat-option>
-              <mat-option value="meat">Meat</mat-option>
-            </mat-select>
-            <mat-error
-              *ngIf="productForm.get('category')?.hasError('required')"
-            >
-              Category is required
-            </mat-error>
-          </mat-form-field>
-        </div>
-
-        <div class="col-md-6">
+        <div class="col-md-4">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Rating</mat-label>
-            <input
-              matInput
-              type="number"
-              step="0.1"
-              min="0"
-              max="5"
-              formControlName="rating"
-              placeholder="4.5"
-            />
+            <input matInput type="number" step="0.1" min="0" max="5" formControlName="rating" placeholder="4.5" />
             <mat-error *ngIf="productForm.get('rating')?.hasError('required')">
               Rating is required
             </mat-error>
@@ -101,19 +62,36 @@
         </div>
       </div>
 
+
       <mat-form-field appearance="outline" class="w-100">
-        <mat-label>Image URL</mat-label>
-        <input
-          matInput
-          formControlName="image"
-          placeholder="https://images.pexels.com/..."
-        />
-        <mat-error *ngIf="productForm.get('image')?.hasError('required')">
-          Image URL is required
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="categoryId">
+          <mat-option *ngFor="let category of categories" [value]="category.id">
+            {{ category.name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="productForm.get('categoryId')?.hasError('required')">
+          Category is required
         </mat-error>
       </mat-form-field>
 
-      <mat-slide-toggle formControlName="isActive" class="w-100">
+
+      <input type="file" #fileInput hidden accept="image/*" (change)="onFileSelected($event)">
+
+      <div class="image-preview-section" *ngIf="imagePreview">
+        <img [src]="imagePreview" alt="Category Image Preview" class="image-preview">
+      </div>
+
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Product Image</mat-label>
+        <input matInput readonly formControlName="productImage" placeholder="Click upload to select image">
+        <button matSuffix mat-icon-button type="button" (click)="fileInput.click()">
+          <mat-icon>upload</mat-icon>
+        </button>
+      </mat-form-field>
+
+
+      <mat-slide-toggle formControlName="status" class="w-100">
         Active Product
       </mat-slide-toggle>
     </form>
@@ -121,12 +99,7 @@
 
   <mat-dialog-actions align="end">
     <button mat-button (click)="onCancel()">Cancel</button>
-    <button
-      mat-raised-button
-      color="primary"
-      (click)="onSave()"
-      [disabled]="productForm.invalid || loading"
-    >
+    <button mat-raised-button color="primary" (click)="onSave()" [disabled]="productForm.invalid || loading">
       <mat-spinner diameter="20" *ngIf="loading"></mat-spinner>
       <span *ngIf="!loading">{{ isEdit ? "Update" : "Create" }}</span>
     </button>

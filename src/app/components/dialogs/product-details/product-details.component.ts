@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -8,7 +8,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { Product } from '../../../models/product.model';
+import { Product, ProductCategory } from '../../../models/product.model';
+import { ProductService } from '../../../services/product.service';
+import { MatIconModule } from '@angular/material/icon';
 
 
 
@@ -21,6 +23,7 @@ import { Product } from '../../../models/product.model';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatIconModule,
     MatSelectModule,
     MatSlideToggleModule,
     MatProgressSpinnerModule
@@ -28,23 +31,46 @@ import { Product } from '../../../models/product.model';
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss'
 })
-export class ProductDetailsComponent {
+export class ProductDetailsComponent implements OnInit {
 
-  productForm: FormGroup;
-  isEdit: boolean;
+  productForm!: FormGroup;
+  isEdit!: boolean;
   loading = false;
+  categories: ProductCategory[] = [];
+
+  selectedFile: File | null = null;
+  selectedImageBase64: string | null = null;
+  imagePreview: string | null = null;
 
   constructor(
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<ProductDetailsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { product?: Product; isEdit: boolean }
-  ) {
-    this.isEdit = data.isEdit;
+    @Inject(MAT_DIALOG_DATA) public data: { product?: Product; isEdit: boolean },
+    private productService: ProductService
+  ) {}
+
+  ngOnInit(): void {
+
+    this.isEdit = this.data.isEdit;
     this.productForm = this.createForm();
 
-    if (this.isEdit && data.product) {
-      this.populateForm(data.product);
-    }
+    this.loadCategories();
+  }
+
+  loadCategories(): void {
+    this.productService.getCategories().subscribe({
+      next: (resp: any) => {
+        console.log('Categories loaded:', resp);
+        this.categories = resp;
+        // If editing, populate the form now that categories are available
+        if (this.isEdit && this.data.product) {
+          this.populateForm(this.data.product);
+        }
+      },
+      error: (error) => {
+        console.error('Error loading categories:', error);
+      }
+    });
   }
 
   private createForm(): FormGroup {
@@ -53,11 +79,31 @@ export class ProductDetailsComponent {
       description: ['', [Validators.required]],
       price: [0, [Validators.required, Validators.min(0.01)]],
       stock: [0, [Validators.required, Validators.min(0)]],
-      category: ['', [Validators.required]],
-      rating: [0, [Validators.required, Validators.min(0), Validators.max(5)]],
-      image: ['', [Validators.required]],
-      isActive: [true]
+      rating: [0, [Validators.required, Validators.min(0)]],
+      categoryId: ['', [Validators.required]], 
+      productImage: ['', [Validators.required]],  
+      status: [false],   
     });
+  }
+
+  onFileSelected(event: any): void {
+    const file = event.target.files[0];
+
+    if (file) {
+      this.selectedFile = file;
+      this.selectedImageBase64 = null;
+      this.productForm.patchValue({ productImage: file.name });
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        const result = reader.result;
+        if (typeof result === 'string') {
+          this.imagePreview = result;
+          this.selectedImageBase64 = result.split(',')[1];
+        }
+      };
+      reader.readAsDataURL(file);
+    }
   }
 
   private populateForm(product: Product): void {
@@ -66,11 +112,35 @@ export class ProductDetailsComponent {
       description: product.description,
       price: product.price,
       stock: product.stock,
-      category: product.category,
       rating: product.rating,
-      image: product.image,
-      isActive: product.isActive
+      categoryId: product.categoryId ?? this.findCategoryIdFromProduct(product) ?? '',
+      productImage: product.productImage,
+      status: product.status
     });
+
+    // If image is base64, convert it to a data URL for preview
+    if (product.productImage && product.productImage.length > 100) {
+      // It's likely base64 data
+      this.imagePreview = 'data:image/jpeg;base64,' + product.productImage;
+    } else if (product.productImage) {
+      // It's a filename or URL
+      this.imagePreview = product.productImage;
+    }
+  }
+
+  private findCategoryIdFromProduct(product: Product): number | null {
+    const anyProd: any = product as any;
+    // Prefer explicit categoryId if present
+    if (anyProd.categoryId) return anyProd.categoryId;
+
+    // Try common alternate properties: categoryName or category
+    const catName = anyProd.categoryName;
+    if (catName && this.categories && this.categories.length) {
+      const found = this.categories.find(c => c.name.toLowerCase() === String(catName).toLowerCase());
+      if (found) return found.id;
+    }
+
+    return null;
   }
 
   onSave(): void {
@@ -84,11 +154,10 @@ export class ProductDetailsComponent {
         description: formValue.description,
         price: formValue.price,
         stock: formValue.stock,
-        category: formValue.category,
         rating: formValue.rating,
-        image: formValue.image,
-        isActive: formValue.isActive,
-        createdAt: this.isEdit && this.data.product ? this.data.product.createdAt : new Date().toISOString()
+        categoryId: formValue.categoryId,
+        productImage: this.selectedImageBase64 || formValue.productImage,
+        status: formValue.status,
       };
 
       setTimeout(() => {

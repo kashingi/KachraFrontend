@@ -50,7 +50,7 @@ export class ProductManagementComponent implements OnInit {
   dataSource = new MatTableDataSource<Product>([]);
   loading = true;
   totalProducts = 0;
-  displayedColumns: string[] = ['id', 'image', 'name', 'category', 'price', 'stock', 'rating', 'status', 'actions'];
+  displayedColumns: string[] = ['id','name', 'description', 'productImage',  'categoryName', 'price', 'stock', 'rating', 'status', 'actions'];
 
   constructor(
     private productService: ProductService,
@@ -65,10 +65,11 @@ export class ProductManagementComponent implements OnInit {
   
   loadProducts(): void {
     this.productService.getProducts().subscribe({
-      next: (products) => {
-        this.products = products;
-        this.dataSource.data = products;
-        this.totalProducts = products.length;
+      next: (resp: any) => {
+        console.log('Products loaded:', resp);
+        this.products = resp;
+        this.dataSource.data = resp;
+        this.totalProducts = resp.length;
         this.loading = false;
       },
       error: (error) => {
@@ -108,54 +109,47 @@ export class ProductManagementComponent implements OnInit {
   }
 
   createProduct(productData: Product): void {
+    console.log('Creating product:', productData);
 
-    const newId = (Math.max(...this.products.map(p => parseInt(p.id as string) || 0)) + 1).toString();
-    productData.id = newId;
-
-    this.productService.createProduct(productData).subscribe({
-      next: (newProduct) => {
-        this.products.push(newProduct);
+    this.productService.AddProduct(productData).subscribe({
+      next: (resp: any) => {
+        console.log('Product created:', resp);
         this.loadProducts();
-        this.snackbar.success('Product created successfully', 'X');
+        this.snackbar.success(resp.Message, 'Close');
       },
-      error: (error) => {
-        console.log(error);
-        this.snackbar.danger('Failed to create product', 'X');
+      error: (err: any) => {
+        console.log(err);
+        this.snackbar.danger(err?.error?.Message, 'Close');
       }
     });
   }
 
   updateProduct(productData: Product): void {
-    this.productService.updateProduct(productData.id, productData).subscribe({
-      next: (updatedProduct) => {
-        const index = this.products.findIndex(p => p.id === productData.id);
-        if (index !== -1) {
-          this.products[index] = updatedProduct;
-        }
+    const productId = productData.id;
+    this.productService.updateProduct(productId, productData).subscribe({
+      next: (resp: any) => {
+        console.log('Product updated:', resp);
         this.loadProducts();
-        this.snackbar.success('Product updated successfully', 'X');
+        this.snackbar.success(resp.Message, 'Close');
       },
-      error: (error) => {
-        console.log(error)
-        this.snackbar.danger('Failed to update product', 'X');
+      error: (err: any) => {
+        console.log(err);
+        this.snackbar.danger(err?.error?.Message, 'Close');
       }
     });
   }
 
 
   toggleProductStatus(product: Product): void {
-    const updatedProduct = { ...product, isActive: !product.isActive };
-    this.productService.updateProduct(product.id, updatedProduct).subscribe({
-      next: (updated) => {
-        const index = this.products.findIndex(p => p.id === product.id);
-        if (index !== -1) {
-          this.products[index] = updated;
-        }
+    const updateStatus = !product.status;
+    this.productService.updateProductStatus(product.id, updateStatus).subscribe({
+      next: (resp: any) => {
+        console.log('Product status updated:', resp);
         this.loadProducts();
-        this.snackbar.success(`Product ${updated.isActive ? 'activated' : 'deactivated'} successfully`, 'X');
+        this.snackbar.success(resp.Message, 'Close');
       },
-      error: (error) => {
-        this.snackbar.danger('Failed to update product status', 'X');
+      error: (err: any) => {
+        this.snackbar.danger(err?.error?.Message, 'Close');
       }
     });
   }
@@ -177,18 +171,28 @@ export class ProductManagementComponent implements OnInit {
 
   deleteProduct(id: any): void {
     this.productService.deleteProduct(id).subscribe({
-      next: () => {
-        //this.products = this.products.filter(p => p.id !== id);
+      next: (resp: any) => {
         this.loadProducts();
         this.loading = false;
-        this.snackbar.success('Product deleted successfully', 'X');
+        this.snackbar.success('Product deleted successfully', 'Close');
       },
-      error: (error) => {
+      error: (err: any) => {
         this.loading = false;
-        console.log(error)
-        this.snackbar.danger('Failed to delete product', 'X');
+        console.log(err);
+        this.snackbar.danger(err?.error?.Message, 'Close');
       }
     });
+  }
+
+   getImageSrc(imageBase64?: string): string {
+    if (!imageBase64) return '';
+
+    // Add data URL prefix if missing
+    if (imageBase64.startsWith('data:image')) {
+      return imageBase64;
+    }
+
+    return 'data:image/webp;base64,' + imageBase64;
   }
 
   getStarArray(rating: number): number[] {

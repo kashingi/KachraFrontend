@@ -84,11 +84,10 @@ export class ExportService {
     const tableData = products.map(product => [
       product.id?.toString() || '',
       product.name,
-      product.category,
+      product.categoryId?.toString() || '',
       `KSH ${product.price}`,
       product.stock.toString(),
-      product.rating.toString(),
-      product.isActive ? 'Active' : 'Inactive'
+      product.status ? 'Active' : 'Inactive'
     ]);
 
     // Add table
@@ -111,12 +110,10 @@ export class ExportService {
         'ID': product.id,
         'Name': product.name,
         'Description': product.description,
-        'Category': product.category,
+        'Category': product.categoryId,
         'Price (KSH)': product.price,
         'Stock': product.stock,
-        'Rating': product.rating,
-        'Status': product.isActive ? 'Active' : 'Inactive',
-        'Created Date': new Date(product.createdAt || '').toLocaleDateString()
+        'Status': product.status ? 'Active' : 'Inactive',
       }))
     );
 
